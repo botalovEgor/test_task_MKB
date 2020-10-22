@@ -1,36 +1,41 @@
 package com.mcb.creditfactory.model;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor()
+@AllArgsConstructor
 @Entity
-@Table(name = "CAR")
-public class Car {
+@Table(name = "AIRPLAN")
+public class AirPlane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
+
     private String brand;
+
     private String model;
-    private Double power;
+
+    private String manufacturer;
 
     @Column(name = "year_of_issue")
     private Short year;
 
+    private Integer fuelCapacity;
+
+    private Integer seats;
+
     @ManyToMany(cascade = {CascadeType.ALL})
-    @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "CAR_ASSESSED_VALUE",
-            joinColumns = @JoinColumn(name = "car_id"),
+    @JoinTable(name = "AIRPLANE_ASSESSED_VALUE",
+            joinColumns = @JoinColumn(name = "airplane_id"),
             inverseJoinColumns = @JoinColumn(name = "assessed_value_id"))
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<AssessedValue> assessedValues = new HashSet<>();
+
 }

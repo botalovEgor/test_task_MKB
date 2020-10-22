@@ -14,7 +14,7 @@ public class CarAdapter implements CollateralObject {
 
     @Override
     public BigDecimal getValue() {
-        return car.getValue();
+        return car.getLastValue();
     }
 
     @Override

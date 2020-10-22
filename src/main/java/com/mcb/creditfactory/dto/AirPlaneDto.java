@@ -11,13 +11,15 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonTypeName("car")
-public class CarDto implements Collateral {
+@JsonTypeName("airPlane")
+public class AirPlaneDto implements Collateral {
     private Long id;
     private String brand;
     private String model;
-    private Double power;
+    private String manufacturer;
     private Short year;
-    private BigDecimal LastValue;
-    private LocalDate LastValueDate;
+    private Integer fuelCapacity;
+    private Integer seats;
+    private BigDecimal value;
+    private LocalDate ValueDate;
 }
