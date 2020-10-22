@@ -20,6 +20,6 @@ public class AirPlaneDto implements Collateral {
     private Short year;
     private Integer fuelCapacity;
     private Integer seats;
-    private BigDecimal value;
+    private BigDecimal lastValue;
     private LocalDate ValueDate;
 }

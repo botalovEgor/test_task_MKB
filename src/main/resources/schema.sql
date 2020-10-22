@@ -26,11 +26,11 @@ CREATE TABLE ASSESSED_VALUE(
 CREATE TABLE CAR_ASSESSED_VALUE(
     car_id integer REFERENCES CAR (id) ON DELETE CASCADE,
     assessed_value_id INTEGER REFERENCES ASSESSED_VALUE (Id) ON DELETE CASCADE,
-    CONSTRAINT UNIQUE (car_id, assessed_value_id)
-)
+    CONSTRAINT car_assessed_value UNIQUE (car_id, assessed_value_id)
+);
 
 CREATE TABLE AIRPLANE_ASSESSED_VALUE(
     airplane_id integer REFERENCES AIRPLANE (id) ON DELETE CASCADE,
     assessed_value_id INTEGER REFERENCES ASSESSED_VALUE (Id) ON DELETE CASCADE,
-    CONSTRAINT UNIQUE (airplane_id, assessed_value_id)
-)
+    CONSTRAINT airplane_assessed_value UNIQUE (airplane_id, assessed_value_id)
+);
