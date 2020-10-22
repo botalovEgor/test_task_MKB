@@ -1,11 +1,16 @@
 package com.mcb.creditfactory.service.airplane;
 
 import com.mcb.creditfactory.dto.AirPlaneDto;
+import com.mcb.creditfactory.dto.CarDto;
+import com.mcb.creditfactory.dto.Collateral;
+import com.mcb.creditfactory.external.CollateralType;
 import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.AirPlane;
 import com.mcb.creditfactory.model.AssessedValue;
+import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.AirPlaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,25 +21,21 @@ import java.util.Set;
 
 @Service
 public class AirPlaneServiceImpl implements AirPlaneService {
-    @Autowired
-    private ExternalApproveService approveService;
 
     @Autowired
     private AirPlaneRepository airPlaneRepository;
 
     @Override
-    public boolean approve(AirPlaneDto dto) {
-        return approveService.approve(new AirPlaneAdapter(dto)) == 0;
+    public AirPlaneDto save(AirPlaneDto airPlaneDto) {
+        return toDTO(airPlaneRepository.save(fromDto(airPlaneDto)));
     }
 
     @Override
-    public AirPlane save(AirPlane airPlane) {
-        return airPlaneRepository.save(airPlane);
-    }
+    public AirPlaneDto load(Long id) {
+        AirPlane airPlane =  airPlaneRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(String.format("AirPlane with id %d not found", id)));
 
-    @Override
-    public Optional<AirPlane> load(Long id) {
-        return airPlaneRepository.findById(id);
+        return toDTO(airPlane);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class AirPlaneServiceImpl implements AirPlaneService {
 
         AssessedValue assessedValue = new AssessedValue();
         assessedValue.setEvaluationDate(LocalDate.now());
-        assessedValue.setValue(dto.getLastValue());
+        assessedValue.setValue(dto.getValue());
 
         Set<AssessedValue> assessedValues = new HashSet<>();
         assessedValues.add(assessedValue);
@@ -73,8 +74,10 @@ public class AirPlaneServiceImpl implements AirPlaneService {
                 airPlane.getYear(),
                 airPlane.getFuelCapacity(),
                 airPlane.getSeats(),
+                last.getId(),
                 last.getValue(),
-                last.getEvaluationDate()
+                last.getEvaluationDate(),
+                CollateralType.AIRPLANE
         );
     }
 
@@ -85,5 +88,18 @@ public class AirPlaneServiceImpl implements AirPlaneService {
 
     private AssessedValue getLastAssessedValue(AirPlane airPlane) {
         return airPlane.getAssessedValues().stream().max(Comparator.comparing(AssessedValue::getEvaluationDate)).get();
+    }
+
+    @Override
+    public Collateral addValue(AirPlaneDto airPlaneDto) {
+        AssessedValue newAssessedValue = new AssessedValue();
+        newAssessedValue.setEvaluationDate(airPlaneDto.getDate());
+        newAssessedValue.setValue(airPlaneDto.getValue());
+
+        AirPlane airPlane = airPlaneRepository.findById(airPlaneDto.getId())
+                .orElseThrow(()-> new IllegalArgumentException("AirPlane not found"));
+        airPlane.getAssessedValues().add(newAssessedValue);
+        airPlaneDto.setValueId(getLastAssessedValue(airPlane).getId());
+        return airPlaneDto;
     }
 }

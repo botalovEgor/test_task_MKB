@@ -1,11 +1,14 @@
 package com.mcb.creditfactory.service.car;
 
 import com.mcb.creditfactory.dto.CarDto;
+import com.mcb.creditfactory.dto.Collateral;
+import com.mcb.creditfactory.external.CollateralType;
 import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.AssessedValue;
 import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,25 +19,21 @@ import java.util.Set;
 
 @Service
 public class CarServiceImpl implements CarService {
-    @Autowired
-    private ExternalApproveService approveService;
 
     @Autowired
     private CarRepository carRepository;
 
     @Override
-    public boolean approve(CarDto dto) {
-        return approveService.approve(new CarAdapter(dto)) == 0;
+    public CarDto save(CarDto cardto) {
+        return toDTO(carRepository.save(fromDto(cardto)));
     }
 
     @Override
-    public Car save(Car car) {
-        return carRepository.save(car);
-    }
+    public CarDto load(Long id) {
+        Car car =  carRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(String.format("Car with id %d not found", id)));
 
-    @Override
-    public Optional<Car> load(Long id) {
-        return carRepository.findById(id);
+        return toDTO(car);
     }
 
     @Override
@@ -47,8 +46,8 @@ public class CarServiceImpl implements CarService {
         car.setYear(dto.getYear());
 
         AssessedValue assessedValue = new AssessedValue();
-        assessedValue.setEvaluationDate(LocalDate.now());
-        assessedValue.setValue(dto.getLastValue());
+        assessedValue.setEvaluationDate(dto.getDate());
+        assessedValue.setValue(dto.getValue());
 
         Set<AssessedValue> assessedValues = new HashSet<>();
         assessedValues.add(assessedValue);
@@ -68,14 +67,29 @@ public class CarServiceImpl implements CarService {
                 car.getModel(),
                 car.getPower(),
                 car.getYear(),
+                last.getId(),
                 last.getValue(),
-                last.getEvaluationDate()
+                last.getEvaluationDate(),
+                CollateralType.CAR
         );
     }
 
     @Override
     public Long getId(Car car) {
         return car.getId();
+    }
+
+    @Override
+    public Collateral addValue(CarDto carDto) {
+        AssessedValue newAssessedValue = new AssessedValue();
+        newAssessedValue.setEvaluationDate(carDto.getDate());
+        newAssessedValue.setValue(carDto.getValue());
+
+        Car car = carRepository.findById(carDto.getId())
+                .orElseThrow(()-> new IllegalArgumentException("Car not found"));
+        car.getAssessedValues().add(newAssessedValue);
+        carDto.setValueId(getLastAssessedValue(car).getId());
+        return carDto;
     }
 
     private AssessedValue getLastAssessedValue(Car car){

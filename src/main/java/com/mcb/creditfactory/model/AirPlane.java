@@ -10,7 +10,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "AIRPLAN")
+@Table(name = "AIRPLANE")
 public class AirPlane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
