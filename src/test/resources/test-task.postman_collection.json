@@ -49,7 +49,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }"
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/collateral/save",
@@ -110,7 +113,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"Tu\",\r\n    \"model\" : \"t-150\",\r\n    \"manufacturer\" : \"moscow\",\r\n    \"year\" : 2016,\r\n    \"fuelCapacity\":222,\r\n    \"seats\":123,\r\n    \"type\" : \"airPlane\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":230000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }"
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"Tu\",\r\n    \"model\" : \"t-150\",\r\n    \"manufacturer\" : \"moscow\",\r\n    \"year\" : 2016,\r\n    \"fuelCapacity\":222,\r\n    \"seats\":123,\r\n    \"type\" : \"airPlane\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":230000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/collateral/save",
@@ -171,7 +177,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"airPlane\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }"
+					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"airPlane\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/collateral/info",
@@ -232,7 +241,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }"
+					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/collateral/info",
@@ -293,7 +305,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":9999999,\r\n        \"evaluationDate\":\"2018-08-08\"\r\n    }\r\n    ]\r\n }"
+					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":9999999,\r\n        \"evaluationDate\":\"2018-08-08\"\r\n    }\r\n    ]\r\n }",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/collateral/newValue",

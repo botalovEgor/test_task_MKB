@@ -43,17 +43,15 @@ public class CollateralService {
         return id;
     }
 
-    public Collateral getInfo(Collateral object) {
+    public Collateral getInfo(String type, Long id) {
+        Collateral collateral = null;
+        if (type.equalsIgnoreCase("car")) {
+            collateral = carService.load(id);
 
-        if (object.getType().equalsIgnoreCase("car")) {
-            CarDto car = (CarDto) object;
-            object = carService.load(car.getId());
-
-        } else if (object.getType().equalsIgnoreCase("airPlane")) {
-            AirPlaneDto airPlane = (AirPlaneDto) object;
-            object = airPlaneService.load(airPlane.getId());
+        } else if (type.equalsIgnoreCase("airPlane")) {
+            collateral = airPlaneService.load(id);
         }
-        return object;
+        return collateral;
     }
 
     @Transactional

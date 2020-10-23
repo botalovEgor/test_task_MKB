@@ -2,34 +2,45 @@ package com.mcb.creditfactory.controller;
 
 import com.mcb.creditfactory.dto.Collateral;
 import com.mcb.creditfactory.service.CollateralService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
+@RequiredArgsConstructor
 public class CollateralObjectController {
-    @Autowired
-    private CollateralService service;
 
-    @PutMapping("/collateral/save")
+    private final CollateralService service;
+
+    @PostMapping("/collateral/save")
     public HttpEntity<Long> save(@RequestBody Collateral object) {
         Long id = service.saveCollateral(object);
-        return id != null ? ResponseEntity.ok(id) : ResponseEntity.badRequest().build();
+
+        URI uri = MvcUriComponentsBuilder
+                .fromMethodName(CollateralObjectController.class, "getInfo", object.getType(), id)
+                .build().encode().toUri();
+
+        return id != null ? ResponseEntity.created(uri).body(id) : ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/collateral/info")
-    public HttpEntity<Collateral> getInfo(@RequestBody Collateral object) {
-        Collateral info = service.getInfo(object);
+    @GetMapping("/collateral/info")
+    public HttpEntity<Collateral> getInfo(@RequestParam("type") String type,
+                                          @RequestParam("id") Long id) {
+        Collateral info = service.getInfo(type, id);
         return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/collateral/newValue")
+    @PatchMapping("/collateral/newValue")
     public HttpEntity<Collateral> addValue(@RequestBody Collateral object) {
         boolean result = service.addValue(object);
-        return result ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 }
