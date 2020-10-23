@@ -21,11 +21,6 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
 
     @Override
-    public boolean approve(CarDto dto) {
-        return approveService.approve(new CarAdapter(dto)) == 0;
-    }
-
-    @Override
     public CarDto save(CarDto car) {
         return toDTO(carRepository.save(fromDto(car)));
     }
@@ -34,11 +29,6 @@ public class CarServiceImpl implements CarService {
     public CarDto load(Long id) {
         Car car = carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Not found"));
         return toDTO(car);
-    }
-
-    public CarDto findAs(CarDto carDto){
-       Car car =  carRepository.findByBrandAndModelAndPowerAndYear(carDto.getBrand(), carDto.getModel(), carDto.getPower(), carDto.getYear());
-       return toDTO(car);
     }
 
     @Override
@@ -66,8 +56,4 @@ public class CarServiceImpl implements CarService {
         );
     }
 
-    @Override
-    public Long getId(Car car) {
-        return car.getId();
-    }
 }

@@ -32,11 +32,11 @@ public class CollateralService {
             return id;
         }
 
-        if (object.getType().equals("car")) {
+        if (object.getType().equalsIgnoreCase("car")) {
             CarDto car = (CarDto) object;
             id = carService.save(car).getId();
 
-        } else if (object.getType().equals("airPlane")) {
+        } else if (object.getType().equalsIgnoreCase("airPlane")) {
             AirPlaneDto airPlane = (AirPlaneDto) object;
             id = airPlaneService.save(airPlane).getId();
         }
@@ -45,13 +45,13 @@ public class CollateralService {
 
     public Collateral getInfo(Collateral object) {
 
-        if (object.getType().equals("car")) {
+        if (object.getType().equalsIgnoreCase("car")) {
             CarDto car = (CarDto) object;
-            object = carService.findAs(car);
+            object = carService.load(car.getId());
 
-        } else if (object.getType().equals("airPlane")) {
+        } else if (object.getType().equalsIgnoreCase("airPlane")) {
             AirPlaneDto airPlane = (AirPlaneDto) object;
-            object = airPlaneService.findAs(airPlane);
+            object = airPlaneService.load(airPlane.getId());
         }
         return object;
     }
@@ -62,11 +62,11 @@ public class CollateralService {
 
         Set<AssessedValue> assessedValues = object.getAssessedValues();
 
-        if (object.getType().equals("car")) {
+        if (object.getType().equalsIgnoreCase("car")) {
             CarDto car = (CarDto) object;
             result = carService.load(car.getId()).getAssessedValues().addAll(assessedValues);
 
-        } else if (object.getType().equals("airPlane")) {
+        } else if (object.getType().equalsIgnoreCase("airPlane")) {
             AirPlaneDto airPlane = (AirPlaneDto) object;
             result = airPlaneService.load(airPlane.getId()).getAssessedValues().addAll(assessedValues);
         }
