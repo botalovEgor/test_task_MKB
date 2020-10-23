@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "a983ddbd-daed-43fa-9f1c-0ea0e01006b0",
+		"name": "test-task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "car save",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "273ff98d-489d-431f-83d8-ef727393ff4e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cfef1f1a-12a8-4978-a136-7207e78fe9c6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "type",
+						"value": "car",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/collateral/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"collateral",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AirPlane Save",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "273ff98d-489d-431f-83d8-ef727393ff4e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cfef1f1a-12a8-4978-a136-7207e78fe9c6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "type",
+						"value": "car",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"Tu\",\r\n    \"model\" : \"t-150\",\r\n    \"manufacturer\" : \"moscow\",\r\n    \"year\" : 2016,\r\n    \"fuelCapacity\":222,\r\n    \"seats\":123,\r\n    \"type\" : \"airPlane\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":230000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/collateral/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"collateral",
+						"save"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -30,8 +30,8 @@ public class AirPlane {
 
     private Integer seats;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "AIRPLANE_ASSESSED_VALUE",
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "AIRPLANE_ASSESSED_VALUES",
             joinColumns = @JoinColumn(name = "airplane_id"),
             inverseJoinColumns = @JoinColumn(name = "assessed_value_id"))
     @ToString.Exclude

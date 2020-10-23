@@ -1,48 +1,54 @@
 package com.mcb.creditfactory.service;
 
+import com.mcb.creditfactory.dto.AirPlaneDto;
 import com.mcb.creditfactory.dto.CarDto;
 import com.mcb.creditfactory.dto.Collateral;
+import com.mcb.creditfactory.external.ExternalApproveService;
+import com.mcb.creditfactory.service.airplane.AirPlaneService;
 import com.mcb.creditfactory.service.car.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
-// TODO: reimplement this
 @Service
 public class CollateralService {
     @Autowired
     private CarService carService;
 
-    @SuppressWarnings("ConstantConditions")
+    @Autowired
+    private AirPlaneService airPlaneService;
+
+    @Autowired
+    ExternalApproveService externalApproveService;
+
     public Long saveCollateral(Collateral object) {
-        if (!(object instanceof CarDto)) {
-            throw new IllegalArgumentException();
+        Long id = null;
+
+        if (externalApproveService.approve(new CollateralObjectAdapter(object)) != 0) {
+            return id;
         }
 
-        CarDto car = (CarDto) object;
-        boolean approved = carService.approve(car);
-        if (!approved) {
-            return null;
-        }
+        if (object.getType().equals("car")) {
+            CarDto car = (CarDto) object;
+            id = carService.save(car).getId();
 
-        return Optional.of(car)
-                .map(carService::fromDto)
-                .map(carService::save)
-                .map(carService::getId)
-                .orElse(null);
+        } else if (object.getType().equals("airPlane")) {
+            AirPlaneDto airPlane = (AirPlaneDto) object;
+            id = airPlaneService.save(airPlane).getId();
+        }
+        return id;
     }
 
     public Collateral getInfo(Collateral object) {
-        if (!(object instanceof CarDto)) {
-            throw new IllegalArgumentException();
-        }
 
-        return Optional.of((CarDto) object)
-                .map(carService::fromDto)
-                .map(carService::getId)
-                .flatMap(carService::load)
-                .map(carService::toDTO)
-                .orElse(null);
+        if (object.getType().equals("car")) {
+            CarDto car = (CarDto) object;
+            object = carService.load(car.getId());
+
+        } else if (object.getType().equals("airPlane")) {
+            AirPlaneDto airPlane = (AirPlaneDto) object;
+            object = airPlaneService.load(airPlane.getId());
+        }
+        return object;
     }
 }

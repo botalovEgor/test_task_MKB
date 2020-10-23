@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ public class CollateralObjectController {
     @Autowired
     private CollateralService service;
 
-    @PostMapping("/collateral/save")
+    @PutMapping("/collateral/save")
     public HttpEntity<Long> save(@RequestBody Collateral object) {
         Long id = service.saveCollateral(object);
         return id != null ? ResponseEntity.ok(id) : ResponseEntity.badRequest().build();

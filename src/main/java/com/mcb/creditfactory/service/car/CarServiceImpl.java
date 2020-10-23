@@ -23,13 +23,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car save(Car car) {
-        return carRepository.save(car);
+    public CarDto save(CarDto car) {
+        return toDTO(carRepository.save(fromDto(car)));
     }
 
     @Override
-    public Optional<Car> load(Long id) {
-        return carRepository.findById(id);
+    public CarDto load(Long id) {
+        Car car = carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Not found"));
+        return toDTO(car);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class CarServiceImpl implements CarService {
                 dto.getModel(),
                 dto.getPower(),
                 dto.getYear(),
-                dto.getValue()
+                dto.getAssessedValues()
         );
     }
 
@@ -52,7 +53,8 @@ public class CarServiceImpl implements CarService {
                 car.getModel(),
                 car.getPower(),
                 car.getYear(),
-                car.getValue()
+                "car",
+                car.getAssessedValues()
         );
     }
 
