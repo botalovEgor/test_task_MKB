@@ -4,10 +4,14 @@ import com.mcb.creditfactory.dto.AirPlaneDto;
 import com.mcb.creditfactory.dto.CarDto;
 import com.mcb.creditfactory.dto.Collateral;
 import com.mcb.creditfactory.external.ExternalApproveService;
+import com.mcb.creditfactory.model.AssessedValue;
 import com.mcb.creditfactory.service.airplane.AirPlaneService;
 import com.mcb.creditfactory.service.car.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 
 @Service
@@ -43,12 +47,29 @@ public class CollateralService {
 
         if (object.getType().equals("car")) {
             CarDto car = (CarDto) object;
-            object = carService.load(car.getId());
+            object = carService.findAs(car);
 
         } else if (object.getType().equals("airPlane")) {
             AirPlaneDto airPlane = (AirPlaneDto) object;
-            object = airPlaneService.load(airPlane.getId());
+            object = airPlaneService.findAs(airPlane);
         }
         return object;
+    }
+
+    @Transactional
+    public boolean addValue(Collateral object) {
+        boolean result = false;
+
+        Set<AssessedValue> assessedValues = object.getAssessedValues();
+
+        if (object.getType().equals("car")) {
+            CarDto car = (CarDto) object;
+            result = carService.load(car.getId()).getAssessedValues().addAll(assessedValues);
+
+        } else if (object.getType().equals("airPlane")) {
+            AirPlaneDto airPlane = (AirPlaneDto) object;
+            result = airPlaneService.load(airPlane.getId()).getAssessedValues().addAll(assessedValues);
+        }
+        return result;
     }
 }

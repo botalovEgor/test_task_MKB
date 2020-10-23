@@ -7,7 +7,10 @@ import com.mcb.creditfactory.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -31,6 +34,11 @@ public class CarServiceImpl implements CarService {
     public CarDto load(Long id) {
         Car car = carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Not found"));
         return toDTO(car);
+    }
+
+    public CarDto findAs(CarDto carDto){
+       Car car =  carRepository.findByBrandAndModelAndPowerAndYear(carDto.getBrand(), carDto.getModel(), carDto.getPower(), carDto.getYear());
+       return toDTO(car);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.mcb.creditfactory.service.airplane;
 
 import com.mcb.creditfactory.dto.AirPlaneDto;
+import com.mcb.creditfactory.dto.CarDto;
 import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.AirPlane;
 import com.mcb.creditfactory.model.AssessedValue;
+import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.AirPlaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,12 @@ public class AirPlaneServiceImpl implements AirPlaneService {
     @Override
     public AirPlaneDto load(Long id) {
         AirPlane airPlane = airPlaneRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Not found"));
+        return toDTO(airPlane);
+    }
+
+    public AirPlaneDto findAs(AirPlaneDto airPlaneDto){
+        AirPlane airPlane =  airPlaneRepository.findByBrandAndModelAndManufacturerAndYearAndFuelCapacityAndSeats(airPlaneDto.getBrand(),
+                airPlaneDto.getModel(), airPlaneDto.getManufacturer(), airPlaneDto.getYear(), airPlaneDto.getFuelCapacity(), airPlaneDto.getSeats());
         return toDTO(airPlane);
     }
 

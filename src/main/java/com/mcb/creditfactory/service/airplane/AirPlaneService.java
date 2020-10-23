@@ -10,4 +10,5 @@ public interface AirPlaneService {
     AirPlane fromDto(AirPlaneDto dto);
     AirPlaneDto toDTO(AirPlane airPlane);
     Long getId(AirPlane airPlane);
+    AirPlaneDto findAs(AirPlaneDto airPlaneDto);
 }

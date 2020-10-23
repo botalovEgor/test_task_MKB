@@ -10,4 +10,5 @@ public interface CarService {
     Car fromDto(CarDto dto);
     CarDto toDTO(Car car);
     Long getId(Car car);
+    CarDto findAs(CarDto carDto);
 }

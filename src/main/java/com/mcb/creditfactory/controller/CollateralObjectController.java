@@ -26,4 +26,10 @@ public class CollateralObjectController {
         Collateral info = service.getInfo(object);
         return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/collateral/newValue")
+    public HttpEntity<Collateral> addValue(@RequestBody Collateral object) {
+        boolean result = service.addValue(object);
+        return result ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }
