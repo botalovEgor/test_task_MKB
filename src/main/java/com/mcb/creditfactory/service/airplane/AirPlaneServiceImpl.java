@@ -1,13 +1,9 @@
 package com.mcb.creditfactory.service.airplane;
 
 import com.mcb.creditfactory.dto.AirPlaneDto;
-import com.mcb.creditfactory.dto.CarDto;
-import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.AirPlane;
-import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.AirPlaneRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;

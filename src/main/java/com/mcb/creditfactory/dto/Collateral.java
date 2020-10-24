@@ -12,6 +12,8 @@ import java.util.Set;
         @JsonSubTypes.Type(value = AirPlaneDto.class, name = "airPlane")
 })
 public interface Collateral {
+    Long getId();
+
     String getType();
 
     Set<AssessedValue> getAssessedValues();
