@@ -6,7 +6,7 @@ import com.mcb.creditfactory.model.AssessedValue;
 
 import java.util.Set;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "jsonType")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CarDto.class, name = "car"),
         @JsonSubTypes.Type(value = AirPlaneDto.class, name = "airPlane")
