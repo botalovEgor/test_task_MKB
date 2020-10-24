@@ -13,7 +13,7 @@ public class CrudServiceFactory {
     @Autowired
     AirPlaneService airPlaneService;
 
-    CrudService getService(String type) {
+    BaseCrudService getService(String type) {
         if (type.equalsIgnoreCase("car")) {
             return carService;
         } else if (type.equalsIgnoreCase("airPlane")) {

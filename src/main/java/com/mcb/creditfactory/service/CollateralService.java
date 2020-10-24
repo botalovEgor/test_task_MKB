@@ -26,7 +26,7 @@ public class CollateralService {
             return id;
         }
 
-        CrudService<Collateral, ?, Long> service = crudServiceFactory.getService(object.getType());
+        BaseCrudService<Collateral, ?, Long> service = crudServiceFactory.getService(object.getType());
         id = service.save(object).getId();
 
         return id;
@@ -35,7 +35,7 @@ public class CollateralService {
     public Collateral getInfo(String type, Long id) {
         Collateral collateral;
 
-        CrudService<Collateral, ?, Long> service = crudServiceFactory.getService(type);
+        BaseCrudService<Collateral, ?, Long> service = crudServiceFactory.getService(type);
         collateral = service.load(id);
 
         return collateral;
@@ -47,7 +47,7 @@ public class CollateralService {
 
         Set<AssessedValue> assessedValues = object.getAssessedValues();
 
-        CrudService<Collateral, ?, Long> service = crudServiceFactory.getService(object.getType());
+        BaseCrudService<Collateral, ?, Long> service = crudServiceFactory.getService(object.getType());
 
         result = service.load(object.getId()).getAssessedValues().addAll(assessedValues);
 
@@ -55,7 +55,7 @@ public class CollateralService {
     }
 
     public List<Collateral> findAllAs(Collateral collateral) {
-        CrudService<Collateral, ?, Long> service = crudServiceFactory.getService(collateral.getType());
+        BaseCrudService<Collateral, ?, Long> service = crudServiceFactory.getService(collateral.getType());
         return service.findAllAsPresent(collateral);
     }
 }
