@@ -4,7 +4,12 @@ import com.mcb.creditfactory.dto.CarDto;
 import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +26,13 @@ public class CarServiceImpl implements CarService {
     public CarDto load(Long id) {
         Car car = carRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Not found"));
         return toDTO(car);
+    }
+
+    public List<CarDto> findAllAsPresent(CarDto carDto){
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
+        Example<Car> exampleQuery = Example.of(fromDto(carDto), matcher);
+        List<Car> cars = carRepository.findAll(exampleQuery);
+        return cars.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @Override

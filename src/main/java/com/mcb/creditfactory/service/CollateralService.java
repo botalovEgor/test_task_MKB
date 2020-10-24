@@ -8,10 +8,11 @@ import com.mcb.creditfactory.model.AssessedValue;
 import com.mcb.creditfactory.service.airplane.AirPlaneService;
 import com.mcb.creditfactory.service.car.CarService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -25,6 +26,7 @@ public class CollateralService {
 
     private final ExternalApproveService externalApproveService;
 
+    @Transactional
     public Long saveCollateral(Collateral object) {
         Long id = null;
 
@@ -69,5 +71,19 @@ public class CollateralService {
             result = airPlaneService.load(airPlane.getId()).getAssessedValues().addAll(assessedValues);
         }
         return result;
+    }
+
+    public List<Collateral> findAllAs(Collateral collateral){
+        List<Collateral> collaterals = new ArrayList<>();
+
+        if (collateral.getType().equalsIgnoreCase("car")) {
+            List<CarDto> carDtos = carService.findAllAsPresent((CarDto)collateral);
+            collaterals.addAll(carDtos);
+
+        } else if (collateral.getType().equalsIgnoreCase("airPlane")) {
+            List<AirPlaneDto> airPlaneDtos = airPlaneService.findAllAsPresent((AirPlaneDto)collateral);
+            collaterals.addAll(airPlaneDtos);
+        }
+        return collaterals;
     }
 }

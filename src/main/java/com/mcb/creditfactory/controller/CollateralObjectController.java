@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,5 +39,11 @@ public class CollateralObjectController {
     public HttpEntity<Collateral> addValue(@RequestBody Collateral object) {
         boolean result = service.addValue(object);
         return result ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/collateral/findAs")
+    public HttpEntity<List<Collateral>> findAs(@RequestBody Collateral collateral) {
+        List<Collateral> collaterals = service.findAllAs(collateral);
+        return !collaterals.isEmpty() ? ResponseEntity.ok(collaterals) : ResponseEntity.notFound().build();
     }
 }

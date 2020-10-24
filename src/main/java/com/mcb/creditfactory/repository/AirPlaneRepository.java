@@ -1,8 +1,8 @@
 package com.mcb.creditfactory.repository;
 
 import com.mcb.creditfactory.model.AirPlane;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AirPlaneRepository extends CrudRepository<AirPlane, Long> {
+public interface AirPlaneRepository extends JpaRepository<AirPlane, Long> {
 
 }
