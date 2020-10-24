@@ -1,24 +1,16 @@
 package com.mcb.creditfactory.service.car;
 
 import com.mcb.creditfactory.dto.CarDto;
-import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.CarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 @Service
+@RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
-    @Autowired
-    private ExternalApproveService approveService;
 
-    @Autowired
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
 
     @Override
     public CarDto save(CarDto car) {

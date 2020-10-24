@@ -12,7 +12,7 @@ import java.util.Comparator;
 
 @AllArgsConstructor
 public class CollateralObjectAdapter implements CollateralObject {
-    private Collateral collateral;
+    private final Collateral collateral;
 
     @Override
     public BigDecimal getValue() {

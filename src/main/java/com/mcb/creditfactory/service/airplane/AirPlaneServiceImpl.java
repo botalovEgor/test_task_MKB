@@ -4,17 +4,15 @@ import com.mcb.creditfactory.dto.AirPlaneDto;
 import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.AirPlane;
 import com.mcb.creditfactory.repository.AirPlaneRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AirPlaneServiceImpl implements AirPlaneService {
 
-    @Autowired
-    private ExternalApproveService approveService;
-
-    @Autowired
-    private AirPlaneRepository airPlaneRepository;
+    private final AirPlaneRepository airPlaneRepository;
 
     @Override
     public AirPlaneDto save(AirPlaneDto airPlane) {

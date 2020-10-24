@@ -7,6 +7,7 @@ import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.AssessedValue;
 import com.mcb.creditfactory.service.airplane.AirPlaneService;
 import com.mcb.creditfactory.service.car.CarService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,15 +16,14 @@ import java.util.Set;
 
 
 @Service
+@RequiredArgsConstructor
 public class CollateralService {
-    @Autowired
-    private CarService carService;
 
-    @Autowired
-    private AirPlaneService airPlaneService;
+    private final CarService carService;
 
-    @Autowired
-    ExternalApproveService externalApproveService;
+    private final AirPlaneService airPlaneService;
+
+    private final ExternalApproveService externalApproveService;
 
     public Long saveCollateral(Collateral object) {
         Long id = null;
