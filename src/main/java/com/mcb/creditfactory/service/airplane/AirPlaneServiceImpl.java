@@ -2,7 +2,7 @@ package com.mcb.creditfactory.service.airplane;
 
 import com.mcb.creditfactory.dto.AirPlaneDto;
 import com.mcb.creditfactory.model.AirPlane;
-import com.mcb.creditfactory.repository.AirPlaneRepository;
+import com.mcb.creditfactory.repository.AIrPlane.AirPlaneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

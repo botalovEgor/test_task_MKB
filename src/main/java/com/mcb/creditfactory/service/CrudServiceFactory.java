@@ -2,16 +2,17 @@ package com.mcb.creditfactory.service;
 
 import com.mcb.creditfactory.service.airplane.AirPlaneService;
 import com.mcb.creditfactory.service.car.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CrudServiceFactory {
-    @Autowired
-    CarService carService;
 
-    @Autowired
-    AirPlaneService airPlaneService;
+    private final CarService carService;
+
+
+    private final AirPlaneService airPlaneService;
 
     BaseCrudService getService(String type) {
         if (type.equalsIgnoreCase("car")) {
