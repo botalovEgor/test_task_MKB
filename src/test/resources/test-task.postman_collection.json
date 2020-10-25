@@ -33,7 +33,7 @@
 				"strictSSL": false
 			},
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [
 					{
 						"key": "type",
@@ -49,13 +49,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/save",
+					"raw": "http://localhost:8080/collateral/car/save",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -63,6 +63,7 @@
 					"port": "8080",
 					"path": [
 						"collateral",
+						"car",
 						"save"
 					]
 				}
@@ -97,7 +98,7 @@
 				"strictSSL": false
 			},
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [
 					{
 						"key": "type",
@@ -113,13 +114,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"Tu\",\r\n    \"model\" : \"t-150\",\r\n    \"manufacturer\" : \"moscow\",\r\n    \"year\" : 2016,\r\n    \"fuelCapacity\":222,\r\n    \"seats\":123,\r\n    \"type\" : \"airPlane\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":230000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"Tu\",\r\n    \"model\" : \"t-150\",\r\n    \"manufacturer\" : \"moscow\",\r\n    \"year\" : 2016,\r\n    \"fuelCapacity\":222,\r\n    \"seats\":123,\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":230000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/save",
+					"raw": "http://localhost:8080/collateral/airPlane/save",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -127,6 +128,7 @@
 					"port": "8080",
 					"path": [
 						"collateral",
+						"airPlane",
 						"save"
 					]
 				}
@@ -158,10 +160,11 @@
 				}
 			],
 			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
 				"strictSSL": false
 			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "type",
@@ -183,7 +186,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/info",
+					"raw": "http://localhost:8080/collateral/airPlane/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -191,7 +194,8 @@
 					"port": "8080",
 					"path": [
 						"collateral",
-						"info"
+						"airPlane",
+						"1"
 					]
 				}
 			},
@@ -222,10 +226,11 @@
 				}
 			],
 			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
 				"strictSSL": false
 			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "type",
@@ -247,7 +252,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/info",
+					"raw": "http://localhost:8080/collateral/car/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -255,7 +260,8 @@
 					"port": "8080",
 					"path": [
 						"collateral",
-						"info"
+						"car",
+						"1"
 					]
 				}
 			},
@@ -289,7 +295,7 @@
 				"strictSSL": false
 			},
 			"request": {
-				"method": "POST",
+				"method": "PATCH",
 				"header": [
 					{
 						"key": "type",
@@ -305,13 +311,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":9999999,\r\n        \"evaluationDate\":\"2018-08-08\"\r\n    }\r\n    ]\r\n }",
+					"raw": "{\r\n    \"id\" : 1,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":9999999,\r\n        \"evaluationDate\":\"2018-08-08\"\r\n    }\r\n    ]\r\n }",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/newValue",
+					"raw": "http://localhost:8080/collateral/car/newValue",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -319,6 +325,7 @@
 					"port": "8080",
 					"path": [
 						"collateral",
+						"car",
 						"newValue"
 					]
 				}
@@ -369,13 +376,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    },\r\n    {\r\n         \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    },\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n\r\n    ]\r\n }",
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":9999999,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    },\r\n    {\r\n         \"id\":null,\r\n        \"value\":2222222,\r\n        \"evaluationDate\":\"2019-01-01\"\r\n    },\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2018-01-01\"\r\n    }\r\n\r\n    ]\r\n }",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/save",
+					"raw": "http://localhost:8080/collateral/car/save",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -383,6 +390,7 @@
 					"port": "8080",
 					"path": [
 						"collateral",
+						"car",
 						"save"
 					]
 				}
@@ -433,13 +441,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"type\" : \"car\",\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
+					"raw": "{\r\n    \"id\" : null,\r\n    \"brand\" : \"volvo\",\r\n    \"model\" : \"s60\",\r\n    \"power\" : 124,\r\n    \"year\" : 2016,\r\n    \"assessedValues\":[\r\n    {\r\n        \"id\":null,\r\n        \"value\":1000001,\r\n        \"evaluationDate\":\"2020-01-01\"\r\n    }\r\n    ]\r\n }",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/collateral/findAs",
+					"raw": "http://localhost:8080/collateral/car/findAs",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -447,6 +455,7 @@
 					"port": "8080",
 					"path": [
 						"collateral",
+						"car",
 						"findAs"
 					]
 				}

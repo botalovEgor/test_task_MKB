@@ -1,6 +1,5 @@
 package com.mcb.creditfactory.dto;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.mcb.creditfactory.model.AssessedValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +10,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonTypeName("airPlane")
-public class AirPlaneDto implements Collateral {
+public class AirPlaneDto {
     private Long id;
     private String brand;
     private String model;
@@ -20,6 +18,5 @@ public class AirPlaneDto implements Collateral {
     private Short year;
     private Integer fuelCapacity;
     private Integer seats;
-    private String type;
     private Set<AssessedValue> assessedValues;
 }

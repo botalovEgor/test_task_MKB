@@ -1,8 +1,13 @@
 package com.mcb.creditfactory.model;
 
+import com.mcb.creditfactory.external.CollateralObject;
+import com.mcb.creditfactory.external.CollateralType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "AIRPLANE")
-public class AirPlane {
+public class AirPlane implements CollateralObject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
@@ -37,5 +42,25 @@ public class AirPlane {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<AssessedValue> assessedValues = new HashSet<>();
+
+    @Override
+    public BigDecimal getValue() {
+        return getLastAssessedValue().getValue();
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return getLastAssessedValue().getEvaluationDate();
+    }
+
+    @Override
+    public CollateralType getType() {
+        return CollateralType.AIRPLANE;
+    }
+
+    private AssessedValue getLastAssessedValue() {
+        return getAssessedValues().stream().max(Comparator.comparing(AssessedValue::getEvaluationDate))
+                .orElseThrow(()->new IllegalArgumentException("value not found"));
+    }
 
 }
