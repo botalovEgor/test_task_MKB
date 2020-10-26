@@ -31,12 +31,12 @@ public class CarsController {
     @GetMapping("/collateral/car/{id}")
     public HttpEntity<CarDto> getInfo(@PathVariable("id") Long id) {
         CarDto carDto = service.load(id);
-        return carDto != null ? ResponseEntity.ok(carDto) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(carDto);
     }
 
     @PatchMapping("/collateral/car/newValue")
-    public HttpEntity<Long> addValue(@RequestBody CarDto carDto) {
-        boolean result = service.addValue(carDto);
+    public HttpEntity<Long> addNewEstimation(@RequestBody CarDto carDto) {
+        boolean result = service.addNewEstimation(carDto);
         return result ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 

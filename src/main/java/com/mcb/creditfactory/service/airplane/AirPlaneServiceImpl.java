@@ -36,7 +36,7 @@ public class AirPlaneServiceImpl implements AirPlaneService {
 
     @Override
     public AirPlaneDto load(Long id) {
-        AirPlane airPlane = airPlaneRepository.findById(id).orElse(null);
+        AirPlane airPlane = airPlaneRepository.findById(id).orElseThrow(()->new IllegalArgumentException(String.format("AirPlane with id %d not found", id)));
         return mapper.toDto(airPlane);
     }
 
@@ -48,7 +48,7 @@ public class AirPlaneServiceImpl implements AirPlaneService {
     }
 
     @Transactional
-    public boolean addValue(AirPlaneDto airPlaneDto) {
+    public boolean addNewEstimation(AirPlaneDto airPlaneDto) {
         boolean result = false;
 
         Optional<AirPlane> airPlaneOptional = airPlaneRepository.findById(airPlaneDto.getId());

@@ -38,7 +38,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDto load(Long id) {
-        Car car = carRepository.findById(id).orElse(null);
+        Car car = carRepository.findById(id).orElseThrow(()->new IllegalArgumentException(String.format("Car with id %d not found", id)));
         return mapper.toDto(car);
     }
 
@@ -50,7 +50,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Transactional
-    public boolean addValue(CarDto carDto) {
+    public boolean addNewEstimation(CarDto carDto) {
         boolean result = false;
 
         Optional<Car> carOptional = carRepository.findById(carDto.getId());

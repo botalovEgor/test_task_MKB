@@ -7,6 +7,6 @@ import java.util.List;
 public interface CarService {
     Long save(CarDto car);
     CarDto load(Long id);
-    boolean addValue(CarDto carDto);
+    boolean addNewEstimation(CarDto carDto);
     List<CarDto> findAllAsPresent(CarDto carDto);
 }

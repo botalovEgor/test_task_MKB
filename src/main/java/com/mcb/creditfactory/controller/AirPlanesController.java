@@ -31,12 +31,12 @@ public class AirPlanesController {
     @GetMapping("/collateral/airPlane/{id}")
     public HttpEntity<AirPlaneDto> getInfo(@PathVariable("id") Long id) {
         AirPlaneDto airPlaneDto = service.load(id);
-        return airPlaneDto != null ? ResponseEntity.ok(airPlaneDto) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(airPlaneDto);
     }
 
     @PatchMapping("/collateral/airPlane/newValue")
-    public HttpEntity<Long> addValue(@RequestBody AirPlaneDto airPlaneDto) {
-        boolean result = service.addValue(airPlaneDto);
+    public HttpEntity<Long> addNewEstimation(@RequestBody AirPlaneDto airPlaneDto) {
+        boolean result = service.addNewEstimation(airPlaneDto);
         return result ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
