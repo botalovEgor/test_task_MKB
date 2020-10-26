@@ -30,7 +30,7 @@ public class CarsController {
 
     @GetMapping("/collateral/car/{id}")
     public HttpEntity<CarDto> getInfo(@PathVariable("id") Long id) {
-        CarDto carDto = service.load(id);
+        CarDto carDto = service.findById(id);
         return ResponseEntity.ok(carDto);
     }
 

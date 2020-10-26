@@ -5,12 +5,14 @@ import com.mcb.creditfactory.dto.CarDtoMapper;
 import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.Car;
 import com.mcb.creditfactory.repository.CarRepository;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,8 +39,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarDto load(Long id) {
-        Car car = carRepository.findById(id).orElseThrow(()->new IllegalArgumentException(String.format("Car with id %d not found", id)));
+    public CarDto findById(Long id) {
+        Car car = carRepository.findById(id).orElseThrow(()->new EntityNotFoundException(String.format("Car with id %d not found", id)));
         return mapper.toDto(car);
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AirPlaneService {
     Long save(AirPlaneDto airPlane);
-    AirPlaneDto load(Long id);
+    AirPlaneDto findById(Long id);
     boolean addNewEstimation(AirPlaneDto airPlaneDto);
     List<AirPlaneDto> findAllAsPresent(AirPlaneDto airPlaneDto);
 }

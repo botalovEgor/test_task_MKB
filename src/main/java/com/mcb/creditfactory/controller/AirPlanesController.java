@@ -30,7 +30,7 @@ public class AirPlanesController {
 
     @GetMapping("/collateral/airPlane/{id}")
     public HttpEntity<AirPlaneDto> getInfo(@PathVariable("id") Long id) {
-        AirPlaneDto airPlaneDto = service.load(id);
+        AirPlaneDto airPlaneDto = service.findById(id);
         return ResponseEntity.ok(airPlaneDto);
     }
 

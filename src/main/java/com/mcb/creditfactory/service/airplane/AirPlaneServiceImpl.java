@@ -11,6 +11,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,8 +36,8 @@ public class AirPlaneServiceImpl implements AirPlaneService {
     }
 
     @Override
-    public AirPlaneDto load(Long id) {
-        AirPlane airPlane = airPlaneRepository.findById(id).orElseThrow(()->new IllegalArgumentException(String.format("AirPlane with id %d not found", id)));
+    public AirPlaneDto findById(Long id) {
+        AirPlane airPlane = airPlaneRepository.findById(id).orElseThrow(()->new EntityNotFoundException(String.format("AirPlane with id %d not found", id)));
         return mapper.toDto(airPlane);
     }
 
